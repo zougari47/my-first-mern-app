@@ -1,0 +1,38 @@
+{
+  "name": "first-mern-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "webpack": "webpack --watch ",
+    "nodemon": "nodemon server-compiled",
+    "dev": "run-p nodemon webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
+    "axios": "^0.27.2",
+    "babel-loader": "^8.2.5",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "fs-extra": "^10.1.0",
+    "mongodb": "^4.7.0",
+    "multer": "^1.4.5-lts.1",
+    "npm-run-all": "^4.1.5",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "sanitize-html": "^2.7.0",
+    "sharp": "^0.30.6",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-node-externals": "^3.0.0",
+    "webpack-sharp-loader": "^1.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
