@@ -18,19 +18,16 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(express.static('public'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json()); // for parsing application/json
+app.use(express.urlencoded({ extended: false })); // for parsing application/x-www-form-urlencoded
 
 function passwordProtected(req, res, next) {
   res.set('WWW-Authenticate', 'Basic realm="Our MERN App"');
-  if (req.headers.authorization == 'Basic YWRtaW46YWRtaW4=') {
-    next();
-  } else {
-    // console.log(req.headers.authorization);
-    res.status(401).send('Try again');
-  }
+  if (req.headers.authorization == 'Basic YWRtaW46YWRtaW4=') next();
+  else res.status(401).send('Try again');
 }
 
+// Home page
 app.get('/', async (req, res) => {
   const allAnimals = await db.collection('animals').find().toArray();
   const generatedHTML = ReactDOMServer.renderToString(
@@ -143,7 +140,6 @@ app.post(
         );
       }
       res.send(photoFileName);
-      // console.log();
     } else {
       //if they are not uploading a new photo
       db.collection('animals').updateOne(
@@ -155,6 +151,7 @@ app.post(
   }
 );
 
+// avoid inserting object to database
 function cleanUp(req, res, next) {
   if (typeof req.body.name != 'string') req.body.name = '';
   if (typeof req.body.species != 'string') req.body.species = '';
@@ -174,6 +171,7 @@ function cleanUp(req, res, next) {
   next();
 }
 
+// connect to mongodb
 async function start() {
   const client = new MongoClient(
     'mongodb://localhost:27017/firstMernApp?&authSource=admin'
